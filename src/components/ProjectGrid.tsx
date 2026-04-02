@@ -26,18 +26,18 @@ function ProjectCard({
       target="_blank"
       rel="noreferrer"
       className={clsx(
-        'group block h-full overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur',
-        'transition hover:-translate-y-0.5 hover:border-slate-600',
+        'group block h-full overflow-hidden rounded-2xl border border-slate-300 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/50',
+        'transition hover:-translate-y-0.5 hover:border-slate-400 dark:hover:border-slate-600',
       )}
     >
       <div className="flex h-full flex-col p-4">
         <SafeImage src={project.imageUrl} alt={project.title} aspectClassName="aspect-[4/3]" />
 
         <div className="mt-4 flex flex-1 flex-col">
-          <h3 className="text-lg font-semibold text-slate-50 transition-colors group-hover:text-primary">
+          <h3 className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-primary dark:text-slate-50">
             {project.title}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-300">{project.description}</p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{project.description}</p>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {project.tags.map((tag: TechTag) => (
@@ -61,7 +61,7 @@ function ProjectCard({
                 e.stopPropagation()
                 onOpenCaseStudy?.(project.id)
               }}
-              className="inline-flex items-center rounded-md border border-slate-700 bg-slate-900/30 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-slate-600 hover:bg-slate-900/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="inline-flex items-center rounded-md border border-slate-300 bg-white/70 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-slate-400 hover:bg-white dark:border-slate-700 dark:bg-slate-900/30 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-900/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Case study
             </button>

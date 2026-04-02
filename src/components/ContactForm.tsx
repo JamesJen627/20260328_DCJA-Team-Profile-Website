@@ -69,14 +69,14 @@ export default function ContactForm({ className }: ContactFormProps) {
   return (
     <form
       className={clsx(
-        'rounded-2xl border border-slate-800 bg-slate-900/30 p-6 backdrop-blur',
+        'rounded-2xl border border-slate-300 bg-white/80 p-6 backdrop-blur dark:border-slate-800 dark:bg-slate-900/30',
         className,
       )}
       onSubmit={handleSubmit(submit)}
     >
       <div className="grid gap-4">
         <div>
-          <label htmlFor="contact-name" className="block text-sm font-medium text-slate-100">
+          <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 dark:text-slate-100">
             Name
           </label>
           <input
@@ -86,8 +86,10 @@ export default function ContactForm({ className }: ContactFormProps) {
             disabled={isSent}
             aria-invalid={errors.name ? 'true' : 'false'}
             className={clsx(
-              'mt-2 w-full rounded-md border bg-slate-950/30 px-3 py-2 text-sm text-slate-100 outline-none transition',
-              errors.name ? 'border-red-500/80' : 'border-slate-700 focus:border-primary/60',
+              'mt-2 w-full rounded-md border bg-white/80 px-3 py-2 text-sm text-slate-800 outline-none transition dark:bg-slate-950/30 dark:text-slate-100',
+              errors.name
+                ? 'border-red-500/80'
+                : 'border-slate-300 focus:border-primary/60 dark:border-slate-700',
               'disabled:cursor-not-allowed disabled:opacity-60',
             )}
             {...register('name', {
@@ -99,7 +101,7 @@ export default function ContactForm({ className }: ContactFormProps) {
         </div>
 
         <div>
-          <label htmlFor="contact-email" className="block text-sm font-medium text-slate-100">
+          <label htmlFor="contact-email" className="block text-sm font-medium text-slate-700 dark:text-slate-100">
             Email
           </label>
           <input
@@ -109,8 +111,10 @@ export default function ContactForm({ className }: ContactFormProps) {
             disabled={isSent}
             aria-invalid={errors.email ? 'true' : 'false'}
             className={clsx(
-              'mt-2 w-full rounded-md border bg-slate-950/30 px-3 py-2 text-sm text-slate-100 outline-none transition',
-              errors.email ? 'border-red-500/80' : 'border-slate-700 focus:border-primary/60',
+              'mt-2 w-full rounded-md border bg-white/80 px-3 py-2 text-sm text-slate-800 outline-none transition dark:bg-slate-950/30 dark:text-slate-100',
+              errors.email
+                ? 'border-red-500/80'
+                : 'border-slate-300 focus:border-primary/60 dark:border-slate-700',
               'disabled:cursor-not-allowed disabled:opacity-60',
             )}
             {...register('email', {
@@ -122,7 +126,10 @@ export default function ContactForm({ className }: ContactFormProps) {
         </div>
 
         <div>
-          <label htmlFor="contact-content" className="block text-sm font-medium text-slate-100">
+          <label
+            htmlFor="contact-content"
+            className="block text-sm font-medium text-slate-700 dark:text-slate-100"
+          >
             Message
           </label>
           <textarea
@@ -132,8 +139,10 @@ export default function ContactForm({ className }: ContactFormProps) {
             disabled={isSent}
             aria-invalid={errors.content ? 'true' : 'false'}
             className={clsx(
-              'mt-2 w-full rounded-md border bg-slate-950/30 px-3 py-2 text-sm text-slate-100 outline-none transition',
-              errors.content ? 'border-red-500/80' : 'border-slate-700 focus:border-primary/60',
+              'mt-2 w-full rounded-md border bg-white/80 px-3 py-2 text-sm text-slate-800 outline-none transition dark:bg-slate-950/30 dark:text-slate-100',
+              errors.content
+                ? 'border-red-500/80'
+                : 'border-slate-300 focus:border-primary/60 dark:border-slate-700',
               'disabled:cursor-not-allowed disabled:opacity-60',
             )}
             {...register('content', {
@@ -158,8 +167,8 @@ export default function ContactForm({ className }: ContactFormProps) {
           {isSent ? 'Sent' : isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
-        {submitSuccess && <p className="text-xs text-emerald-300">{submitSuccess}</p>}
-        {submitError && <p className="text-xs text-red-300">{submitError}</p>}
+        {submitSuccess && <p className="text-xs text-emerald-600 dark:text-emerald-300">{submitSuccess}</p>}
+        {submitError && <p className="text-xs text-red-600 dark:text-red-300">{submitError}</p>}
       </div>
     </form>
   )

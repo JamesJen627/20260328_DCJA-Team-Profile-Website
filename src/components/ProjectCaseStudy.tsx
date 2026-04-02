@@ -18,38 +18,38 @@ const mdxCache = new Map<string, MdxComponent>()
 const mdxComponents: Record<string, (props: unknown) => React.ReactElement> = {
   h1: (props) => {
     const p = props as React.HTMLAttributes<HTMLHeadingElement>
-    return <h1 {...p} className="text-2xl font-semibold text-slate-50" />
+    return <h1 {...p} className="text-2xl font-semibold text-slate-900 dark:text-slate-50" />
   },
   h2: (props) => {
     const p = props as React.HTMLAttributes<HTMLHeadingElement>
-    return <h2 {...p} className="mt-6 text-xl font-semibold text-slate-50" />
+    return <h2 {...p} className="mt-6 text-xl font-semibold text-slate-900 dark:text-slate-50" />
   },
   h3: (props) => {
     const p = props as React.HTMLAttributes<HTMLHeadingElement>
-    return <h3 {...p} className="mt-5 text-lg font-semibold text-slate-50" />
+    return <h3 {...p} className="mt-5 text-lg font-semibold text-slate-900 dark:text-slate-50" />
   },
   p: (props) => {
     const p = props as React.HTMLAttributes<HTMLParagraphElement>
-    return <p {...p} className="mt-3 text-sm leading-relaxed text-slate-300" />
+    return <p {...p} className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300" />
   },
   ul: (props) => {
     const p = props as React.HTMLAttributes<HTMLUListElement>
-    return <ul {...p} className="mt-3 list-disc pl-6 text-sm text-slate-300" />
+    return <ul {...p} className="mt-3 list-disc pl-6 text-sm text-slate-700 dark:text-slate-300" />
   },
   ol: (props) => {
     const p = props as React.HTMLAttributes<HTMLOListElement>
-    return <ol {...p} className="mt-3 list-decimal pl-6 text-sm text-slate-300" />
+    return <ol {...p} className="mt-3 list-decimal pl-6 text-sm text-slate-700 dark:text-slate-300" />
   },
   li: (props) => {
     const p = props as React.HTMLAttributes<HTMLLIElement>
-    return <li {...p} className="mt-1 text-sm text-slate-300" />
+    return <li {...p} className="mt-1 text-sm text-slate-700 dark:text-slate-300" />
   },
   blockquote: (props) => {
     const p = props as React.HTMLAttributes<HTMLElement>
     return (
       <blockquote
         {...p}
-        className="mt-3 border-l-2 border-primary/40 bg-primary/5 pl-4 text-sm text-slate-300"
+        className="mt-3 border-l-2 border-primary/40 bg-primary/5 pl-4 text-sm text-slate-700 dark:text-slate-300"
       />
     )
   },
@@ -69,7 +69,7 @@ const mdxComponents: Record<string, (props: unknown) => React.ReactElement> = {
     return (
       <code
         {...p}
-        className="rounded bg-slate-900/60 px-1 py-0.5 font-mono text-xs text-slate-100"
+        className="rounded bg-slate-200 px-1 py-0.5 font-mono text-xs text-slate-900 dark:bg-slate-900/60 dark:text-slate-100"
       />
     )
   },
@@ -78,7 +78,7 @@ const mdxComponents: Record<string, (props: unknown) => React.ReactElement> = {
     return (
       <pre
         {...p}
-        className="mt-4 overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/40 p-4"
+        className="mt-4 overflow-x-auto rounded-xl border border-slate-300 bg-slate-100 p-4 dark:border-slate-800 dark:bg-slate-950/40"
       />
     )
   },
@@ -130,10 +130,10 @@ export default function ProjectCaseStudy({ projectId, className }: ProjectCaseSt
   if (!Content)
     return (
       <div className={className}>
-        <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-6">
-          <div className="h-6 w-1/2 animate-pulse rounded bg-slate-800/40" />
-          <div className="mt-4 h-4 w-2/3 animate-pulse rounded bg-slate-800/40" />
-          <div className="mt-4 h-4 w-1/2 animate-pulse rounded bg-slate-800/40" />
+        <div className="rounded-xl border border-slate-300 bg-slate-100 p-6 dark:border-slate-800 dark:bg-slate-900/30">
+          <div className="h-6 w-1/2 animate-pulse rounded bg-slate-300/60 dark:bg-slate-800/40" />
+          <div className="mt-4 h-4 w-2/3 animate-pulse rounded bg-slate-300/60 dark:bg-slate-800/40" />
+          <div className="mt-4 h-4 w-1/2 animate-pulse rounded bg-slate-300/60 dark:bg-slate-800/40" />
         </div>
       </div>
     )

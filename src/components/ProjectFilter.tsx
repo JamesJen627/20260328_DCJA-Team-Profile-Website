@@ -31,7 +31,7 @@ export default function ProjectFilter({
           'rounded-full border px-3 py-1 text-sm font-medium transition',
           activeTag === null
             ? 'border-primary/50 bg-primary/10 text-primary'
-            : 'border-slate-700 bg-slate-900/30 text-slate-300 hover:border-slate-600',
+            : 'border-slate-300 bg-white/70 text-slate-700 hover:border-slate-400 dark:border-slate-700 dark:bg-slate-900/30 dark:text-slate-300 dark:hover:border-slate-600',
         )}
       >
         All
@@ -46,7 +46,7 @@ export default function ProjectFilter({
             'rounded-full border px-3 py-1 text-sm font-medium transition',
             activeTag === tag
               ? 'border-primary/50 bg-primary/10 text-primary'
-              : 'border-slate-700 bg-slate-900/30 text-slate-300 hover:border-slate-600',
+              : 'border-slate-300 bg-white/70 text-slate-700 hover:border-slate-400 dark:border-slate-700 dark:bg-slate-900/30 dark:text-slate-300 dark:hover:border-slate-600',
           )}
         >
           {tag}
