@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import ProjectFilter from './components/ProjectFilter'
 import ProjectCaseStudy from './components/ProjectCaseStudy'
 import ProjectGrid from './components/ProjectGrid'
+import ContactForm from './components/ContactForm'
 import { projects } from './data/projects'
 import type { Project, TechTag } from './types'
 
@@ -40,13 +41,16 @@ function App() {
   return (
     <main className="min-h-screen bg-background py-12">
       <div className="mx-auto w-full max-w-6xl px-6">
-        <h1 className="text-2xl font-semibold text-slate-50">Projects</h1>
-        <p className="mt-2 text-sm text-slate-300">
-          A responsive project gallery using <span className="text-primary">lg</span> as the layout breakpoint.
-        </p>
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 backdrop-blur">
+          <h1 className="text-2xl font-semibold text-slate-50">Projects</h1>
+          <p className="mt-2 text-sm text-slate-300">
+            A responsive project gallery using <span className="text-primary">lg</span> as the layout
+            breakpoint.
+          </p>
 
-        <div className="mt-6">
-          <ProjectFilter availableTags={availableTags} activeTag={activeTag} onChange={setActiveTag} />
+          <div className="mt-6 rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+            <ProjectFilter availableTags={availableTags} activeTag={activeTag} onChange={setActiveTag} />
+          </div>
         </div>
       </div>
 
@@ -55,6 +59,17 @@ function App() {
           projects={filteredProjects}
           onOpenCaseStudy={(projectId) => setCaseStudyProjectId(projectId)}
         />
+      </div>
+
+      <div className="mt-12 mx-auto w-full max-w-6xl px-6">
+        <h2 className="text-xl font-semibold text-slate-50">Contact Form</h2>
+        <p className="mt-2 text-sm text-slate-300">
+          If you are interested in collaboration or hiring, send us a message below. Email validation
+          and submission status are already included.
+        </p>
+        <div className="mt-6">
+          <ContactForm />
+        </div>
       </div>
 
       <AnimatePresence>

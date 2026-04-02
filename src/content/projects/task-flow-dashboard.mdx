@@ -1,17 +1,19 @@
 # Task Flow Dashboard
 
-本案例展示如何将团队的任务流（例如看板、里程碑与交付状态）组织成可扩展的 UI 结构。
+This case study shows how to organize team workflows (kanban, milestones, and delivery status)
+into a scalable UI structure.
 
-## 交互目标
+## Interaction goals
 
-- 过滤与布局动画的协同
-- 信息密度与可读性的平衡
+- Smooth coordination between filtering and layout animation
+- Balance between information density and readability
 
-## 动画与布局
+## Animation and layout
 
-当筛选条件变化时，卡片进出与位置重排需要保持“连续的视觉流”。这也是本项目里使用 `AnimatePresence` 与 `layout` 的原因。
+When filters change, card entry/exit and reordering should keep a continuous visual flow. That is
+why this project uses `AnimatePresence` and `layout`.
 
-## 片段：筛选动画思路
+## Snippet: filtering animation pattern
 
 ```tsx
 <AnimatePresence mode="popLayout" initial={false}>

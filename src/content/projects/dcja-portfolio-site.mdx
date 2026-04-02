@@ -1,16 +1,17 @@
 # DCJA Team Portfolio
 
-这是一个团队作品墙与叙事型案例页面的示例，重点围绕：
+This is a sample team portfolio and narrative case-study page focused on:
 
-- 现代动效体验
-- 清晰的信息层级
-- 可复用的组件与类型
+- Modern motion design
+- Clear information hierarchy
+- Reusable components and types
 
-## 亮点：用类型约束 UI 数据
+## Highlight: Type-safe UI data
 
-在数据层定义统一的 `Project` 接口，再把它贯穿到 `ProjectGrid`、`TechBadge` 等组件中，让“数据结构变化”更容易被 TypeScript 捕获。
+Define a single `Project` interface in the data layer and reuse it across components like
+`ProjectGrid` and `TechBadge`, so TypeScript can catch data-shape changes early.
 
-## 示例：组件如何组织
+## Example: Component structure
 
 ```tsx
 export interface ProjectGridProps {
@@ -22,7 +23,8 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
 }
 ```
 
-## 结语
+## Closing
 
-本示例用于验证 MDX（远程/按需渲染）在详情页中的集成方式。
+This example is used to validate MDX integration (remote / on-demand rendering) in the detail
+view.
 

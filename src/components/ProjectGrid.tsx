@@ -26,14 +26,14 @@ function ProjectCard({
       target="_blank"
       rel="noreferrer"
       className={clsx(
-        'group block overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/30',
-        'transition-colors hover:border-slate-600',
+        'group block h-full overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur',
+        'transition hover:-translate-y-0.5 hover:border-slate-600',
       )}
     >
-      <div className="p-4">
+      <div className="flex h-full flex-col p-4">
         <SafeImage src={project.imageUrl} alt={project.title} aspectClassName="aspect-[4/3]" />
 
-        <div className="mt-4">
+        <div className="mt-4 flex flex-1 flex-col">
           <h3 className="text-lg font-semibold text-slate-50 transition-colors group-hover:text-primary">
             {project.title}
           </h3>
@@ -45,13 +45,15 @@ function ProjectCard({
             ))}
           </div>
 
-          {project.featured && (
-            <div className="mt-3 inline-flex rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
-              Featured
-            </div>
-          )}
+          <div className="mt-3 min-h-6">
+            {project.featured && (
+              <div className="inline-flex rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                Featured
+              </div>
+            )}
+          </div>
 
-          <div className="mt-3">
+          <div className="mt-auto pt-3">
             <button
               type="button"
               onClick={(e) => {
@@ -72,8 +74,8 @@ function ProjectCard({
 
 export default function ProjectGrid({ projects, className, onOpenCaseStudy }: ProjectGridProps) {
   return (
-    <div className={twMerge('w-full max-w-6xl px-6', className)}>
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div className={twMerge('mx-auto w-full max-w-6xl px-6', className)}>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:auto-rows-fr">
         <AnimatePresence mode="popLayout" initial={false}>
           {projects.map((project) => (
             <motion.div

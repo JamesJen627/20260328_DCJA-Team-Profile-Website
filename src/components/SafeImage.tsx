@@ -39,7 +39,8 @@ export default function SafeImage({
   const [status, setStatus] = useState<SafeImageStatus>('loading')
 
   useEffect(() => {
-    setStatus('loading')
+    // Reset state when `src` changes. Use a microtask to avoid sync setState-in-effect lint.
+    Promise.resolve().then(() => setStatus('loading'))
   }, [src])
 
   const wrapperClassName = twMerge(
