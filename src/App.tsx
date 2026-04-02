@@ -12,6 +12,29 @@ import { projects } from './data/projects'
 import type { Project, TechTag } from './types'
 
 const THEME_STORAGE_KEY = 'theme'
+const SITE_TITLE = 'DCJA Team Portfolio'
+const DEFAULT_DESCRIPTION =
+  'DCJA Team Portfolio showcases selected projects, case studies, and contact channels for collaboration.'
+
+function upsertMetaByName(name: string, content: string) {
+  let meta = document.querySelector(`meta[name="${name}"]`)
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('name', name)
+    document.head.appendChild(meta)
+  }
+  meta.setAttribute('content', content)
+}
+
+function upsertMetaByProperty(property: string, content: string) {
+  let meta = document.querySelector(`meta[property="${property}"]`)
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('property', property)
+    document.head.appendChild(meta)
+  }
+  meta.setAttribute('content', content)
+}
 
 function App() {
   const [activeTag, setActiveTag] = useState<TechTag | null>(null)
@@ -52,6 +75,27 @@ function App() {
     document.documentElement.classList.toggle('dark', isDark)
     localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light')
   }, [isDark])
+
+  useEffect(() => {
+    const seoTitle = caseStudyProject
+      ? `${caseStudyProject.title} | Case Study | ${SITE_TITLE}`
+      : activeTag
+        ? `${activeTag} Projects | ${SITE_TITLE}`
+        : SITE_TITLE
+
+    const seoDescription = caseStudyProject
+      ? caseStudyProject.description
+      : activeTag
+        ? `Explore ${activeTag} projects and implementation details from the ${SITE_TITLE}.`
+        : DEFAULT_DESCRIPTION
+
+    document.title = seoTitle
+    upsertMetaByName('description', seoDescription)
+    upsertMetaByProperty('og:title', seoTitle)
+    upsertMetaByProperty('og:description', seoDescription)
+    upsertMetaByName('twitter:title', seoTitle)
+    upsertMetaByName('twitter:description', seoDescription)
+  }, [activeTag, caseStudyProject])
 
   return (
     <main className="min-h-screen bg-slate-100 py-12 text-slate-900 transition-colors dark:bg-background dark:text-slate-100">
