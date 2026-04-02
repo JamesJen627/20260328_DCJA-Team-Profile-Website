@@ -10,9 +10,16 @@ import TechBadge from './TechBadge'
 export interface ProjectGridProps {
   projects: Project[]
   className?: string
+  onOpenCaseStudy?: (projectId: string) => void
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  onOpenCaseStudy,
+}: {
+  project: Project
+  onOpenCaseStudy?: (projectId: string) => void
+}) {
   return (
     <a
       href={project.link}
@@ -43,13 +50,27 @@ function ProjectCard({ project }: { project: Project }) {
               Featured
             </div>
           )}
+
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                onOpenCaseStudy?.(project.id)
+              }}
+              className="inline-flex items-center rounded-md border border-slate-700 bg-slate-900/30 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-slate-600 hover:bg-slate-900/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Case study
+            </button>
+          </div>
         </div>
       </div>
     </a>
   )
 }
 
-export default function ProjectGrid({ projects, className }: ProjectGridProps) {
+export default function ProjectGrid({ projects, className, onOpenCaseStudy }: ProjectGridProps) {
   return (
     <div className={twMerge('w-full max-w-6xl px-6', className)}>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -64,7 +85,7 @@ export default function ProjectGrid({ projects, className }: ProjectGridProps) {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <ProjectCard project={project} />
+              <ProjectCard project={project} onOpenCaseStudy={onOpenCaseStudy} />
             </motion.div>
           ))}
         </AnimatePresence>
