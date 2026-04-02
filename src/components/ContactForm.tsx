@@ -6,15 +6,14 @@ import type { Message } from '../types'
 
 export interface ContactFormProps {
   className?: string
-  /**
-   * V1: placeholder behavior for "success -> sent" state only.
-   * Task 4.2 will replace this with real Web3Forms / Netlify Forms requests.
-   */
-  onSend?: (message: Message) => Promise<void>
 }
 
-export default function ContactForm({ className, onSend }: ContactFormProps) {
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+
+export default function ContactForm({ className }: ContactFormProps) {
   const [isSent, setIsSent] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null)
 
   const {
     register,
@@ -32,17 +31,38 @@ export default function ContactForm({ className, onSend }: ContactFormProps) {
 
   const submit = async (values: Message) => {
     if (isSent) return
+    setSubmitError(null)
+    setSubmitSuccess(null)
 
-    // Placeholder: Task 4.2 will replace this with email forwarding calls.
-    const sender =
-      onSend ??
-      (async () => {
-        await new Promise((r) => setTimeout(r, 600))
-      })
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+    if (!accessKey) {
+      setSubmitError('Missing VITE_WEB3FORMS_ACCESS_KEY in environment variables.')
+      return
+    }
 
-    await sender(values)
+    const response = await fetch(WEB3FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        access_key: accessKey,
+        name: values.name,
+        email: values.email,
+        message: values.content,
+        subject: 'New portfolio contact message',
+      }),
+    })
+
+    const data = (await response.json()) as { success?: boolean; message?: string }
+    if (!response.ok || !data.success) {
+      setSubmitError(data.message ?? 'Failed to send. Please try again.')
+      return
+    }
 
     setIsSent(true)
+    setSubmitSuccess('Message sent successfully.')
     reset()
   }
 
@@ -137,6 +157,9 @@ export default function ContactForm({ className, onSend }: ContactFormProps) {
         >
           {isSent ? 'Sent' : isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
+
+        {submitSuccess && <p className="text-xs text-emerald-300">{submitSuccess}</p>}
+        {submitError && <p className="text-xs text-red-300">{submitError}</p>}
       </div>
     </form>
   )
