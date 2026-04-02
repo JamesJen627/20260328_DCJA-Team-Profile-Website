@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { AnimatePresence, motion } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
 
 import type { Project, TechTag } from '../types'
@@ -52,9 +53,21 @@ export default function ProjectGrid({ projects, className }: ProjectGridProps) {
   return (
     <div className={twMerge('w-full max-w-6xl px-6', className)}>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        <AnimatePresence mode="popLayout" initial={false}>
+          {projects.map((project) => (
+            <motion.div
+              key={project.id}
+              layout
+              className="h-full"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ProjectCard project={project} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   )
